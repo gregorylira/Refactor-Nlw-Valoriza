@@ -1,16 +1,35 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Exclude } from "class-transformer";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
 @Entity()
 export class User {
+  @Exclude()
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  firstName: string;
+  @Column({ type: "text" })
+  name: string;
 
   @Column()
-  lastName: string;
+  email: string;
 
+  @Exclude()
+  @Column({ type: "boolean" })
+  admin: boolean;
+
+  @Exclude()
   @Column()
-  age: number;
+  password: string;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

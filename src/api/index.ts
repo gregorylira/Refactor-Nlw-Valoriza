@@ -1,4 +1,5 @@
 import { Router } from "express";
+import userRouter from "./routes/user.router";
 
 export default () => {
   const router = Router();
@@ -8,6 +9,8 @@ export default () => {
       status: "ok",
     });
   });
+
+  userRouter(router);
 
   return router;
 };

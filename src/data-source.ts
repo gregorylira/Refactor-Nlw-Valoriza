@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { User } from "./entities/User";
-import { default1657820887902 } from "./migrations/1657820887902-default";
+import { default1657838292716 } from "./migrations/1657838292716-default";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -13,6 +13,6 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: false,
   entities: [User],
-  migrations: [default1657820887902],
+  migrations: [default1657838292716],
   subscribers: [],
 });
