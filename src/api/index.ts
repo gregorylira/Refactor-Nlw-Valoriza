@@ -1,4 +1,5 @@
 import { Router } from "express";
+import tagRouter from "./routes/tag.router";
 import userRouter from "./routes/user.router";
 
 export default () => {
@@ -11,6 +12,7 @@ export default () => {
   });
 
   userRouter(router);
+  tagRouter(router);
 
   return router;
 };
