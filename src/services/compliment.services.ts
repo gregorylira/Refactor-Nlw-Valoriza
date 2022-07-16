@@ -53,4 +53,14 @@ export class ComplimentService {
 
     return compliment;
   }
+  async ListUserReceiverCompliment(userId: string) {
+    const compliment = await complimentRepository.find({
+      where: {
+        user_sender: userId,
+      },
+      relations: ["userSender", "userReceiver", "tag"],
+    });
+
+    return compliment;
+  }
 }

@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import { AuthenticateUserService } from "../../services/authenticate.services";
 import { UserServices } from "../../services/user.services";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
 const route = Router();
 const userService = new UserServices();
@@ -22,7 +23,7 @@ export default (app: Router) => {
     return res.status(201).json(newUser);
   });
 
-  app.get("/user/all", async (req, res) => {
+  app.get("/user/all", ensureAuthenticated, async (req, res) => {
     const users = await userService.listUsers();
     return res.status(200).json(users);
   });
