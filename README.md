@@ -34,7 +34,6 @@
 
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
@@ -46,23 +45,16 @@
 
 ## :dart: About
 
-Describe your project
-
-## :sparkles: Features
-
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
+This project is intended to be a refactoring of an old project to adapt to new code architecture models, and also to serve as a learning experience for the most current and updated libraries.
 
 ## :rocket: Technologies
 
 The following tools were used in this project:
 
-- [Expo](https://expo.io/)
 - [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
+- [JsonWebToken](https://jwt.io)
+- [postgresql](https://postgresql.org)
+- [Typeorm](https://typeorm.io)
 
 ## :white_check_mark: Requirements
 
@@ -90,7 +82,7 @@ $ yarn start
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
-Made with :heart: by <a href="https://github.com/gregorylira" target="_blank">{{YOUR_NAME}}</a>
+Made with :heart: by <a href="https://github.com/gregorylira" target="_blank">gregorylira</a>
 
 &#xa0;
 
