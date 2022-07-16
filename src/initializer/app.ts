@@ -5,6 +5,7 @@ import routes from "../api";
 import config from "../config";
 import "express-async-errors";
 import cors from "cors";
+import { swaggerDocs } from "../api/utils/swagger";
 
 import { AppDataSource } from "../data-source";
 import { User } from "../entities/User";
@@ -21,7 +22,13 @@ export default class ConfigServer {
   }
 
   private setupServer() {
-    this.app.use(cors());
+    const cors = require("cors");
+    this.app.use(
+      cors({
+        origin: ["localhost", "26.100.58.57"],
+      })
+    );
+    // this.app.use(cors());
     this.app.use(express.json());
   }
 
@@ -48,7 +55,7 @@ export default class ConfigServer {
   }
 
   private setupRoutes() {
-    this.app.use("/api", routes());
+    this.app.use("/v1/api", routes());
     this.app.use(
       (
         err: Error,
@@ -73,6 +80,7 @@ export default class ConfigServer {
   public start() {
     this.server = this.app.listen(this.port, () => {
       console.log(`Server listening on port ${this.port}`);
+      swaggerDocs(this.app, this.port);
     });
   }
 }

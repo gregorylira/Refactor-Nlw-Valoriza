@@ -1,0 +1,329 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de tags de usuarios",
+    "description": "Essa API tem como objetivo de envio e recebimento de tags e mensagens entre usuarios",
+    "termsOfService": "http://google.com",
+    "contact": {
+      "email": "gregory.lira@gmail.com"
+    }
+  },
+  "version": "1.0.0",
+  "servers": [
+    {
+      "url": "http://localhost:3002/v1"
+    },
+    {
+      "url": "http://26.100.58.57:3002/v1"
+    }
+  ],
+
+  "apis": ["../src/api/index.ts"],
+  "paths": {
+    "/api/user": {
+      "post": {
+        "summary": "Cadastro de usuarios",
+        "description": "essa rota sera responsavel por cadastrar novos usuarios",
+        "tags": ["User"],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "tag": {
+                  "value": {
+                    "email": "ademir@ademir.com",
+                    "password": "12345"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Already Exists"
+          },
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletar tags",
+        "description": "essa rota sera responsavel por deletar o usuario",
+        "tags": ["User"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "tag": {
+                  "value": {
+                    "email": "teste@teste.com",
+                    "password": "12455"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Tag not found"
+          },
+          "204": {
+            "description": "Not content"
+          }
+        }
+      },
+      "put": {
+        "summary": "Listagem de tags",
+        "description": "essa rota sera responsavel por listar todas as tags",
+        "tags": ["User"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id do usuario",
+            "require": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "tag": {
+                  "value": {
+                    "email": "ademir@ademir.com",
+                    "password": "12345"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Already Exists"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/user/all": {
+      "get": {
+        "summary": "Listagem de tags",
+        "description": "essa rota sera responsavel por listar todas as tags",
+        "tags": ["User"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Already Exists"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "summary": "Login de usuarios",
+        "description": "essa rota sera responsavel por logar os usuarios",
+        "tags": ["User"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "tag": {
+                  "value": {
+                    "email": "ademir@ademir.com",
+                    "password": "12345"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Already Exists"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/tag": {
+      "post": {
+        "summary": "cadastro de tags",
+        "description": "essa rota sera responsavel por cadastrar novos tags",
+        "tags": ["Tag"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tag"
+              },
+              "examples": {
+                "tag": {
+                  "value": {
+                    "name": "lindo :)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Already Exists"
+          },
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletar tags",
+        "description": "essa rota sera responsavel por deletar novos tags",
+        "tags": ["Tag"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tag"
+              },
+              "examples": {
+                "tag": {
+                  "value": {
+                    "name": "lindo :)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Tag not found"
+          },
+          "204": {
+            "description": "Not content"
+          }
+        }
+      }
+    },
+    "/api/tag/all": {
+      "get": {
+        "summary": "Listagem de tags",
+        "description": "essa rota sera responsavel por listar todas as tags",
+        "tags": ["Tag"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Already Exists"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "admin": {
+            "type": "boolean"
+          },
+          "image": {
+            "type": "file"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

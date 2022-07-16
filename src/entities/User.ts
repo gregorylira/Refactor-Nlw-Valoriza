@@ -9,7 +9,6 @@ import {
 
 @Entity()
 export class User {
-  @Exclude()
   @PrimaryGeneratedColumn()
   id: number;
 
