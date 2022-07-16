@@ -55,6 +55,7 @@ The following tools were used in this project:
 - [JsonWebToken](https://jwt.io)
 - [postgresql](https://postgresql.org)
 - [Typeorm](https://typeorm.io)
+- [FireBase](https://firebase.google.com)
 
 ## :white_check_mark: Requirements
 

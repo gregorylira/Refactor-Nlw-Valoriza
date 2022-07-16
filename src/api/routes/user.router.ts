@@ -25,7 +25,6 @@ export default (app: Router) => {
     async (req: Request, res: Response) => {
       const { name, email, admin, password } = req.body;
       const image_url = req.file;
-      console.log(image_url);
 
       const newUser = await userService.createUser({
         name,
