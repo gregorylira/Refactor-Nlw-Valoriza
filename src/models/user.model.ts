@@ -3,5 +3,6 @@ export interface IUser {
   name?: string;
   email: string;
   admin?: boolean;
+  image_url?: string;
   password: string;
 }

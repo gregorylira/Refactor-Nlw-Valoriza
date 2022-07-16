@@ -5,13 +5,14 @@ import { compare, hash } from "bcryptjs";
 import { classToPlain } from "class-transformer";
 
 export class UserServices {
-  async createUser({ name, admin = false, email, password }: IUser) {
+  async createUser({ name, admin = false, email, password, image_url }: IUser) {
     try {
       const passwordHash = await hash(password, 8);
       const user = {
         name,
         admin,
         email,
+        image_url,
         password: passwordHash,
       };
       const alreadyExists = await userRepositoy.findOneBy({ email });

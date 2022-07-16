@@ -3,9 +3,7 @@ import { DataSource } from "typeorm";
 import { Compliment } from "./entities/Compliement";
 import { Tag } from "./entities/Tag";
 import { User } from "./entities/User";
-import { default1657838292716 } from "./migrations/1657838292716-default";
-import { default1657886973502 } from "./migrations/1657886973502-default";
-import { default1657902974639 } from "./migrations/1657902974639-default";
+import { NewDB1657977703346 } from "./migrations/1657977703346-NewDB";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -17,10 +15,6 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: false,
   entities: [User, Tag, Compliment],
-  migrations: [
-    default1657838292716,
-    default1657886973502,
-    default1657902974639,
-  ],
+  migrations: [NewDB1657977703346],
   subscribers: [],
 });

@@ -2,26 +2,42 @@ import { Request, Response, Router } from "express";
 import { AuthenticateUserService } from "../../services/authenticate.services";
 import { UserServices } from "../../services/user.services";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
+import { uploadImage } from "../../services/firebase";
+
+const multer = require("multer");
 
 const route = Router();
 const userService = new UserServices();
 const authenticateUserService = new AuthenticateUserService();
 
+const Multer = multer({
+  storage: multer.memoryStorage(),
+  limits: 1024 * 1024 * 1024,
+});
+
 export default (app: Router) => {
   app.use("/user", route);
 
-  app.post("/user", async (req: Request, res: Response) => {
-    const { name, email, admin, password } = req.body;
+  app.post(
+    "/user",
+    Multer.single("image"),
+    uploadImage,
+    async (req: Request, res: Response) => {
+      const { name, email, admin, password } = req.body;
+      const image_url = req.file;
+      console.log(image_url);
 
-    const newUser = await userService.createUser({
-      name,
-      email,
-      admin,
-      password,
-    });
+      const newUser = await userService.createUser({
+        name,
+        email,
+        admin,
+        password,
+        image_url: image_url.firebaseUrl,
+      });
 
-    return res.status(201).json(newUser);
-  });
+      return res.status(201).json(newUser);
+    }
+  );
 
   app.get("/user/all", ensureAuthenticated, async (req, res) => {
     const users = await userService.listUsers();

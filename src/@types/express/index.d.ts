@@ -3,5 +3,6 @@ declare namespace Express {
   //   que vai ser passado pelo ensureAuthenticated para o ensureAdmin
   export interface Request {
     user_id: string;
+    file: any;
   }
 }
