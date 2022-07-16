@@ -1,8 +1,10 @@
 import { Request, Response, Router } from "express";
+import { AuthenticateUserService } from "../../services/authenticate.services";
 import { UserServices } from "../../services/user.services";
 
 const route = Router();
 const userService = new UserServices();
+const authenticateUserService = new AuthenticateUserService();
 
 export default (app: Router) => {
   app.use("/user", route);
@@ -38,5 +40,13 @@ export default (app: Router) => {
     const user = await userService.modifyUser({ id, name, email, password });
 
     return res.status(201).json({ user });
+  });
+
+  app.post("/login", async (req: Request, res: Response) => {
+    const { email, password } = req.body;
+
+    const token = await authenticateUserService.execute({ email, password });
+
+    return res.status(200).json(token);
   });
 };

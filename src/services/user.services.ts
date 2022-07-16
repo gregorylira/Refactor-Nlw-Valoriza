@@ -67,9 +67,12 @@ export class UserServices {
       if (!user) {
         throw new Error("User not found");
       }
+
+      const passwordHash = await hash(password, 8);
+
       user.name = name;
       user.email = email;
-      user.password = password;
+      user.password = passwordHash;
       await userRepositoy.save(user);
 
       return user;

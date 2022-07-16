@@ -1,4 +1,5 @@
 import { Router } from "express";
+import complimentRouter from "./routes/compliment.router";
 import tagRouter from "./routes/tag.router";
 import userRouter from "./routes/user.router";
 
@@ -13,6 +14,7 @@ export default () => {
 
   userRouter(router);
   tagRouter(router);
+  complimentRouter(router);
 
   return router;
 };
