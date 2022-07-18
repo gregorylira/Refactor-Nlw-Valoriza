@@ -34,8 +34,10 @@
               "examples": {
                 "tag": {
                   "value": {
+                    "name": "ademir",
                     "email": "ademir@ademir.com",
-                    "password": "12345"
+                    "password": "12345",
+                    "file": "image.png"
                   }
                 }
               }
@@ -50,10 +52,7 @@
             "description": "Already Exists"
           },
           "201": {
-            "description": "OK",
-            "content": {
-              "application/json": {}
-            }
+            "description": "OK"
           }
         }
       },
@@ -90,7 +89,9 @@
             "description": "Not content"
           }
         }
-      },
+      }
+    },
+    "/api/user/{id}": {
       "put": {
         "summary": "Listagem de tags",
         "description": "essa rota sera responsavel por listar todas as tags",
@@ -105,6 +106,7 @@
           }
         ],
         "requestBody": {
+          "require": true,
           "content": {
             "application/json": {
               "schema": {
@@ -183,10 +185,7 @@
             "description": "Already Exists"
           },
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {}
-            }
+            "description": "OK"
           }
         }
       }
@@ -285,6 +284,98 @@
           }
         }
       }
+    },
+    "/api/compliment": {
+      "post": {
+        "summary": "Criar um compliment",
+        "description": "cria um compliment que liga um usuario a mensagem e tag enviada para outro",
+        "tags": ["Compliment"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Compliment"
+              },
+              "examples": {
+                "tag": {
+                  "value": {
+                    "userSender": 3,
+                    "userReceiver": 4,
+                    "tagId": 4,
+                    "message": "oi gato"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Can't send praise for you"
+          },
+          "201": {
+            "description": "Message Send"
+          }
+        }
+      }
+    },
+    "/api/compliment/send/{id}": {
+      "get": {
+        "summary": "Listagem de mensagens(tags) enviadas pelo usuario",
+        "description": "essa rota sera responsavel por listar todas as mensagens(tags) enviadas pelo usuario",
+        "tags": ["Compliment"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id do usuario",
+            "require": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Already Exists"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/compliment/receiver/{id}": {
+      "get": {
+        "summary": "Listagem de mensagens(tags) recebidas pelo usuario",
+        "description": "essa rota sera responsavel por listar todas as mensagens(tags) recebidas pelo usuario",
+        "tags": ["Compliment"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id do usuario",
+            "require": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Already Exists"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -314,6 +405,23 @@
           },
           "image": {
             "type": "file"
+          }
+        }
+      },
+      "Compliment": {
+        "type": "object",
+        "properties": {
+          "userSender": {
+            "type": "string"
+          },
+          "userReceiver": {
+            "type": "string"
+          },
+          "tagId": {
+            "type": "string"
+          },
+          "message": {
+            "type": "boolean"
           }
         }
       }

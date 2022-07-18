@@ -23,7 +23,7 @@ export default (app: Router) => {
     Multer.single("image"),
     uploadImage,
     async (req: Request, res: Response) => {
-      const { name, email, admin, password } = req.body;
+      const { name, email, admin = false, password } = req.body;
       const image_url = req.file;
 
       const newUser = await userService.createUser({

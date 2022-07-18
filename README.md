@@ -56,6 +56,7 @@ The following tools were used in this project:
 - [postgresql](https://postgresql.org)
 - [Typeorm](https://typeorm.io)
 - [FireBase](https://firebase.google.com)
+- [Swagger](https://swagger.io)
 
 ## :white_check_mark: Requirements
 
